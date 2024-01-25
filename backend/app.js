@@ -7,11 +7,7 @@ const app = express();
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "https://my-ptm-adft.vercel.app",
-  })
-);
+app.use(cors());
 app.use(cookieParser());
 
 //api routes import
