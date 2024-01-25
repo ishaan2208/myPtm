@@ -18,9 +18,24 @@ const updateUserSchema = zod.object({
   lastName: zod.string().min(3).max(20).optional(),
 });
 
+export const getUser = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
 export const getAllUsers = async (req, res) => {
   try {
-    const loggedInUserId = req.user._id;
+    const loggedInUserId = req.user?._id || "";
     const filter = req.query.filter || "";
     const users = await User.find({
       _id: { $ne: loggedInUserId },
@@ -228,6 +243,7 @@ export const getUserTransactions = async (req, res) => {
         },
       },
     ]);
+    console.log(userTransactions);
     res.status(200).json({
       status: "success",
       data: userTransactions,

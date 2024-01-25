@@ -3,6 +3,7 @@ import {
   deleteAllUsers,
   editUser,
   getAllUsers,
+  getUser,
   getUserTransactions,
   login,
   signUp,
@@ -18,5 +19,6 @@ router.route("/login").post(login);
 router.route("/edit").put(verifyJWT, editUser);
 router.route("/").delete(deleteAllUsers);
 router.route("/transactions").get(verifyJWT, getUserTransactions);
+router.route("/me").get(verifyJWT, getUser);
 
 export default router;

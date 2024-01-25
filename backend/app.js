@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
   })
 );
 app.use(cookieParser());
@@ -19,5 +19,6 @@ import mainRouter from "./src/routes/index.js";
 
 //routes declaration
 app.use("/api/v1", mainRouter);
+app.get("/api", (req, res) => res.json({ message: "Hello from api" }));
 
 export default app;

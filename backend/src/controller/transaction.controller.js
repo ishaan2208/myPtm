@@ -37,6 +37,7 @@ export const createTransaction = async (req, res) => {
       },
       { new: true }
     ).session(session);
+
     const toNewUser = await User.findByIdAndUpdate(
       toId,
       {
@@ -52,12 +53,23 @@ export const createTransaction = async (req, res) => {
       toUserBalance: toNewUser.balance,
     });
   } catch (error) {
-    // await session.abortTransaction();
+    await session.abortTransaction();
     res.status(400).json({
       status: "fail",
       message: error.message,
     });
   } finally {
-    // session.endSession();
+    session.endSession();
+  }
+};
+
+export const deleteAll = async (req, res) => {
+  try {
+    await Transaction.deleteMany();
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error.message,
+    });
   }
 };
