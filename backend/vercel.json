@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "app.js",
+            "src": "./index.js",
             "use": "@vercel/node",
             "config": {
                 "includeFiles": [
@@ -14,7 +14,18 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "app.js"
+            "dest": "./index.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
         }
     ]
 }
