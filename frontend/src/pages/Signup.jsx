@@ -31,7 +31,7 @@ export default function Signup() {
   });
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:5010/api/v1/users/signup", data)
+      .post("https://my-ptm.vercel.app/api/v1/users/signup", data)
       .then((res) => {
         console.log(res.data);
         setData(res.data.token);

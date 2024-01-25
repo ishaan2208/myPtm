@@ -72,7 +72,7 @@ export default function Payment() {
   useEffect(() => {
     setLoader(true);
     axios
-      .get("http://localhost:5010/api/v1/users/me", {
+      .get("https://my-ptm.vercel.app/api/v1/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

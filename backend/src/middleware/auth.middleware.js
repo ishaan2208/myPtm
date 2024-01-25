@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 export const verifyJWT = async (req, res, next) => {
   try {
     console.log(req.headers.authorization);
-    const token = await req.headers.authorization.replace("Bearer ", "");
+    const token =
+      (await req.headers.authorization?.replace("Bearer ", "")) || "";
     if (!token) {
       throw new Error("Invalid credentials");
     }

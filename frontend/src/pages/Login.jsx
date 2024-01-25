@@ -13,7 +13,7 @@ export default function Login() {
   const { handleSubmit, register, watch } = useForm();
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:5010/api/v1/users/login", data)
+      .post("https://my-ptm.vercel.app/api/v1/users/login", data)
       .then((res) => {
         setToken(res.data.token);
         localStorage.setItem("token", res.data.token);

@@ -7,7 +7,7 @@ export default function Transacton() {
   const [transaction, setTransaction] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5010/api/v1/users/transactions", {
+      .get("https://my-ptm.vercel.app/api/v1/users/transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
