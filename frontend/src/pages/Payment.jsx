@@ -19,7 +19,7 @@ export default function Payment() {
     setLoader(true);
     axios
       .post(
-        "http://localhost:5010/api/v1/transactions",
+        "https://my-ptm.vercel.app/api/v1/transactions",
         {
           amount: amount * 100,
           toId: id,
