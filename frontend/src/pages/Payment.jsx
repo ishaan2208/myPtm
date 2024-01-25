@@ -13,6 +13,7 @@ export default function Payment() {
   const [balance, setBalance] = useState(0);
   const [bool, setBool] = useState(false);
   const [refresh, setRefresh] = useState(0);
+  const [userLoader, setUserLoader] = useState(false);
 
   const payhandle = (id) => {
     console.log(id);
@@ -51,6 +52,7 @@ export default function Payment() {
 
   useEffect(() => {
     console.log(token);
+    setUserLoader(true);
     if (!token) {
       console.log("No token found");
       return;
@@ -64,7 +66,7 @@ export default function Payment() {
       .then((res) => {
         console.log(res.data.data);
         setUser(res.data.data);
-        setLoader(false);
+        setUserLoader(false);
         console.log(user);
       });
   }, [payee]);
@@ -152,31 +154,35 @@ export default function Payment() {
           className=" w-full mt-2"
         />
         <div className=" flex flex-col w-full my-4">
-          {user.map((u) => {
-            return (
-              <div
-                className=" bg-gray-800/30 my-2 p-8 rounded-xl border-[1px] border-slate-600/50 flex justify-between items-center"
-                key={u._id}
-              >
-                <div>
-                  <h1 className=" uppercase font-bold text-sm">
-                    {u.firstName} {u.lastName}
-                  </h1>
-                  <h1 className=" font-light text-slate-400 text-xs">
-                    {u.username}
-                  </h1>
-                </div>
-                <button
-                  className=" bg-green-500 px-4 py-1 rounded-lg hover:bg-green-600 duration-200"
-                  onClick={() => {
-                    payhandle(u._id);
-                  }}
+          {userLoader ? (
+            <>Loading...</>
+          ) : (
+            user.map((u) => {
+              return (
+                <div
+                  className=" bg-gray-800/30 my-2 p-8 rounded-xl border-[1px] border-slate-600/50 flex justify-between items-center"
+                  key={u._id}
                 >
-                  Pay
-                </button>
-              </div>
-            );
-          })}
+                  <div>
+                    <h1 className=" uppercase font-bold text-sm">
+                      {u.firstName} {u.lastName}
+                    </h1>
+                    <h1 className=" font-light text-slate-400 text-xs">
+                      {u.username}
+                    </h1>
+                  </div>
+                  <button
+                    className=" bg-green-500 px-4 py-1 rounded-lg hover:bg-green-600 duration-200"
+                    onClick={() => {
+                      payhandle(u._id);
+                    }}
+                  >
+                    Pay
+                  </button>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </>
