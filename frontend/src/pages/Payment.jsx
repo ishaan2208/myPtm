@@ -68,6 +68,10 @@ export default function Payment() {
         setUser(res.data.data);
         setUserLoader(false);
         console.log(user);
+      })
+      .catch((err) => {
+        setUserLoader(false);
+        console.log(err);
       });
   }, [payee]);
 
@@ -84,6 +88,10 @@ export default function Payment() {
 
         setBalance(res.data.data.balance);
         setLoader(false);
+      })
+      .catch((err) => {
+        setLoader(false);
+        console.log("error", err);
       });
   }, [refresh]);
 
