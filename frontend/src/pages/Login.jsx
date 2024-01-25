@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,12 @@ import { useRecoilState } from "recoil";
 
 export default function Login() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("https://my-ptm.vercel.app/api").then((res) => {
+      console.log(res.data);
+    });
+  }, []);
 
   const [token, setToken] = useRecoilState(tokenState);
   const { handleSubmit, register, watch } = useForm();
