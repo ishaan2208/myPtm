@@ -14,6 +14,7 @@ export default function Payment() {
   const [bool, setBool] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [userLoader, setUserLoader] = useState(false);
+  const [error, setError] = useState("");
 
   const payhandle = (id) => {
     console.log(id);
@@ -58,7 +59,7 @@ export default function Payment() {
       return;
     }
     axios
-      .get(`http://localhost:5010/api/v1/users/getUsers?filter=${payee}`, {
+      .get(`https://my-ptm.vercel.app/api/v1/users/getUsers?filter=${payee}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,6 +72,7 @@ export default function Payment() {
       })
       .catch((err) => {
         setUserLoader(false);
+        setError("error");
         console.log(err);
       });
   }, [payee]);
@@ -161,7 +163,9 @@ export default function Payment() {
           onChange={(e) => setPayee(e.target.value)}
           className=" w-full mt-2"
         />
+
         <div className=" flex flex-col w-full my-4">
+          <h1 className=" text-white">{error}</h1>
           {userLoader ? (
             <>Loading...</>
           ) : (
