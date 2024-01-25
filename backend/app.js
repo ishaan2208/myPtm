@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "'https://my-ptm-adft.vercel.app",
+    origin: "https://my-ptm-adft.vercel.app",
   })
 );
 app.use(cookieParser());
